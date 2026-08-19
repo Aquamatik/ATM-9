@@ -7,7 +7,7 @@ GTCEuStartupEvents.registry('gtceu:recipe_type', allthemods => {
     allthemods.create('greenhouse')
         .category('greenhouse')
         .setEUIO('in')
-        .setMaxIOSize(4, 4, 1, 0)
+        .setMaxIOSize(6, 6, 1, 0)
         .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, FillDirection.LEFT_TO_RIGHT)
         .setSound(GTSoundEntries.BOILER)
 })
@@ -17,7 +17,7 @@ GTCEuStartupEvents.registry('gtceu:machine', allthemods => {
         .rotationState(RotationState.NON_Y_AXIS)
         .recipeType('greenhouse')
         .appearanceBlock(GTBlocks.CASING_STEEL_SOLID)
-        .recipeModifiers([GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.PERFECT_OVERCLOCK)])
+        .recipeModifiers([GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.OC_PERFECT_SUBTICK])
         .pattern(definition => FactoryBlockPattern.start()
             .aisle('CCC', 'CCC', 'CGC', 'CGC', 'CCC')
             .aisle('CCC', 'FPF', 'G#G', 'GIG', 'CGC')
@@ -45,7 +45,7 @@ GTCEuStartupEvents.registry('gtceu:machine', allthemods => {
             .where('#', Predicates.air())
             .build()
         )
-        .workableCasingRenderer('gtceu:block/casings/solid/machine_casing_solid_steel', 'gtceu:block/multiblock/implosion_compressor', false)
+        .workableCasingModel('gtceu:block/casings/solid/machine_casing_solid_steel', 'gtceu:block/multiblock/implosion_compressor')
 })
 
 // This File has been authored by AllTheMods Staff, or a Community contributor for use in AllTheMods - AllTheMods 9.

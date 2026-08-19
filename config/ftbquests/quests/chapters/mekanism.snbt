@@ -13,7 +13,7 @@
 		x: 9.0d
 		y: -5.5d
 	}]
-	order_index: 6
+	order_index: 7
 	progression_mode: "flexible"
 	quest_links: [ ]
 	quests: [
@@ -2867,8 +2867,8 @@
 				"This quest is intentionally hidden, if you're seeing this, you're in editing mode."
 			]
 			disable_toast: true
-			hide: true
 			hide_details_until_startable: true
+			hide_until_deps_visible: true
 			icon: {
 				Count: 1
 				id: "ftbquests:custom_icon"
@@ -2894,7 +2894,7 @@
 				}
 			]
 			x: -13.0d
-			y: 0.0d
+			y: -4.0d
 		}
 	]
 	title: "{atm9.chapters.21.title}"

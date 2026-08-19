@@ -3,7 +3,7 @@
 
 ServerEvents.recipes(allthemods => {
 
-	allthemods.remove({ id: 'gtceu:extruder/nan_certificate' })
+    allthemods.remove({ id: 'gtceu:extruder/nan_certificate' })
 
     allthemods.recipes.gtceu.extruder('nan_certificate_modified')
         .itemInputs(['64x gtceu:neutronium_block', '64x gtceu:neutronium_block'])
@@ -17,14 +17,14 @@ ServerEvents.recipes(allthemods => {
         .itemOutputs('kubejs:inert_nether_star')
         .duration(10)
         .EUt(IV)
-    
+
     allthemods.recipes.gtceu.mixer('kubejs:inert_fluid')
         .itemInputs('kubejs:inert_nether_star')
         .inputFluids(Fluid.of('gtceu:aqua_regia', 2000))
         .outputFluids(Fluid.of('gtceu:inert_nether_essence', 2304))
         .duration(12)
         .EUt(IV)
-    
+
     allthemods.recipes.gtceu.autoclave('kubejs:autoclave/nether_star')
         .itemInputs('gtceu:polyethylene_dust')
         .inputFluids(Fluid.of('gtceu:inert_nether_essence', 144))
@@ -42,6 +42,44 @@ ServerEvents.recipes(allthemods => {
         .duration(25600)
         .EUt(ULV)
 
+    // added rotor holder tiers
+    allthemods.shaped('gtceu:uhv_uhv_rotor_holder', ['ABA', 'BCB', 'ABA'], {
+        A: 'gtceu:small_naquadah_alloy_gear',
+        B: 'gtceu:neutronium_gear',
+        C: 'gtceu:uhv_machine_hull'
+    }).id('allthemods:uhv_rotor_holder')
+
+    allthemods.shaped('gtceu:uev_uev_rotor_holder', ['ABA', 'BCB', 'ABA'], {
+        A: 'gtceu:small_unobtronium_gear',
+        B: 'gtceu:vibtronium_gear',
+        C: 'gtceu:alltheneutronium_block'
+    }).id('allthemods:uev_rotor_holder')
+
+    allthemods.shaped('gtceu:uiv_uiv_rotor_holder', ['ABA', 'BCB', 'ABA'], {
+        A: 'gtceu:small_vibtronium_gear',
+        B: 'gtceu:alltheneutronium_gear',
+        C: 'gtceu:unobtronium_block'
+    }).id('allthemods:uiv_rotor_holder')
+
+    // added rotor holder tier dusts
+    allthemods.recipes.gtceu.mixer('alltheneutronium_dust')
+        .itemInputs('allthemodium:allthemodium_dust', '2x gtceu:neutronium_dust')
+        .itemOutputs('gtceu:alltheneutronium_dust')
+        .duration(1200)
+        .EUt(ZPM)
+    
+    allthemods.recipes.gtceu.mixer('vibtronium_dust')
+        .itemInputs('2x allthemodium:vibranium_dust', '3x gtceu:alltheneutronium_dust')
+        .itemOutputs('gtceu:vibtronium_dust')
+        .duration(600)
+        .EUt(UV)
+
+    allthemods.recipes.gtceu.mixer('unobtronium_dust')
+        .itemInputs('3x allthemodium:unobtainium_dust', '4x gtceu:vibtronium_dust')
+        .itemOutputs('gtceu:unobtronium_dust')
+        .duration(900)
+        .EUt(UV)
+
     // ALCR
     allthemods.recipes.gtceu.assembly_line('advanced_large_chemical_reactor')
         .itemInputs('gtceu:large_chemical_reactor', '3x #gtceu:circuits/iv', '15x gtceu:nitinol_plate', '4x gtceu:platinum_single_cable')
@@ -55,32 +93,157 @@ ServerEvents.recipes(allthemods => {
         .duration(500)
         .scannerResearch(Item.of('gtceu:large_chemical_reactor'))
         .EUt(IV)
+
+    // NeoCube
+    allthemods.recipes.gtceu.assembly_line('neocube')
+        .itemInputs('gtceu:assembly_line', '4x #gtceu:circuits/uv', '9x gtceu:naquadah_alloy_plate', '16x gtceu:enriched_naquadah_trinium_europium_duranide_single_wire', '2x gtceu:zpm_field_generator')
+        .itemOutputs('gtceu:neocube')
+        .inputFluids(
+            Fluid.of('gtceu:lubricant', 4000),
+            Fluid.of('gtceu:soldering_alloy', 2304)
+        )
+        .duration(500)
+        .stationResearch(b => b.researchStack(Item.of('gtceu:assembly_line')).CWUt(96).EUt(UV))
+        .EUt(ZPM)
+
+    // Ore Processing Plant
+    allthemods.recipes.gtceu.assembly_line('ore_processing_plant')
+        .itemInputs('2x gtceu:large_maceration_tower', 'gtceu:large_chemical_bath', 'gtceu:large_centrifuge', 'gtceu:large_sifting_funnel', '8x #gtceu:circuits/zpm', '4x gtceu:zpm_robot_arm', '8x gtceu:zpm_electric_piston', '16x gtceu:zpm_electric_motor', '4x gtceu:zpm_fluid_regulator')
+        .itemOutputs('gtceu:ore_processing_plant')
+        .inputFluids(
+            Fluid.of('gtceu:lubricant', 4000),
+            Fluid.of('gtceu:soldering_alloy', 2304)
+        )
+        .duration(500)
+        .stationResearch(b => b.researchStack(Item.of('gtceu:large_maceration_tower')).CWUt(16).EUt(LuV))
+        .EUt(ZPM)
+
+    // molten piglich heart
+    allthemods.recipes.gtceu.extractor('molten_piglich_heart')
+        .itemInputs('allthemodium:piglich_heart')
+        .outputFluids(Fluid.of('gtceu:molten_piglich_heart', 144))
+        .duration(12500)
+        .EUt(LV)
+
+    allthemods.recipes.gtceu.extractor('molten_piglich_heart_block')
+        .itemInputs('allthemodium:piglich_heart_block')
+        .outputFluids(Fluid.of('gtceu:molten_piglich_heart', 1296))
+        .duration(101250)
+        .EUt(LV)
     
-    allthemods.recipes.gtceu.assembler('uhv_16a_energy_hatch')
-        .itemInputs('2x gtceu:uhv_energy_input_hatch_4a', '2x gtceu:uhpic_chip', 'kubejs:superthermal_transference_coil', '2x kubejs:cable_of_hyperconductivity')
-        .itemOutputs('gtceu:uhv_energy_input_hatch_16a')
-        .duration(200)
-        .EUt(UHV)
+    // atmium vib unob alloys
+    allthemods.recipes.gtceu.chemical_reactor('unobtainium_allthemodium_alloy_ingot')
+        .itemInputs(['allthemodium:allthemodium_ingot', 'allthemodium:unobtainium_ingot'])
+        .inputFluids(Fluid.of('gtceu:molten_piglich_heart', 144))
+        .itemOutputs('allthemodium:unobtainium_allthemodium_alloy_ingot')
+        .duration(7800000)
+        .EUt(LV)
     
-    // fluix and sky steel dust maceration
+    allthemods.recipes.gtceu.chemical_reactor('unobtainium_allthemodium_alloy_block')
+        .itemInputs(['allthemodium:allthemodium_block', 'allthemodium:unobtainium_block'])
+        .inputFluids(Fluid.of('gtceu:molten_piglich_heart', 1296))
+        .itemOutputs('allthemodium:unobtainium_allthemodium_alloy_block')
+        .duration(63180000)
+        .EUt(LV)
+
+    allthemods.recipes.gtceu.chemical_reactor('unobtainium_vibranium_alloy_ingot')
+        .itemInputs(['allthemodium:vibranium_ingot', 'allthemodium:unobtainium_ingot'])
+        .inputFluids(Fluid.of('gtceu:molten_piglich_heart', 144))
+        .itemOutputs('allthemodium:unobtainium_vibranium_alloy_ingot')
+        .duration(7800000)
+        .EUt(LV)
+    
+    allthemods.recipes.gtceu.chemical_reactor('unobtainium_vibranium_alloy_block')
+        .itemInputs(['allthemodium:vibranium_block', 'allthemodium:unobtainium_block'])
+        .inputFluids(Fluid.of('gtceu:molten_piglich_heart', 1296))
+        .itemOutputs('allthemodium:unobtainium_vibranium_alloy_block')
+        .duration(63180000)
+        .EUt(LV)
+
+    allthemods.recipes.gtceu.chemical_reactor('vibranium_allthemodium_alloy_ingot')
+        .itemInputs(['allthemodium:allthemodium_ingot', 'allthemodium:vibranium_ingot'])
+        .inputFluids(Fluid.of('gtceu:molten_piglich_heart', 144))
+        .itemOutputs('allthemodium:vibranium_allthemodium_alloy_ingot')
+        .duration(7800000)
+        .EUt(LV)
+    
+    allthemods.recipes.gtceu.chemical_reactor('vibranium_allthemodium_alloy_block')
+        .itemInputs(['allthemodium:allthemodium_block', 'allthemodium:vibranium_block'])
+        .inputFluids(Fluid.of('gtceu:molten_piglich_heart', 1296))
+        .itemOutputs('allthemodium:vibranium_allthemodium_alloy_block')
+        .duration(63180000)
+        .EUt(LV)
+
+    // Ad Astra Plates
+    allthemods.recipes.gtceu.bender('desh_plate')
+        .itemInputs('ad_astra:desh_ingot')
+        .circuit(1)
+        .itemOutputs('ad_astra:desh_plate')
+        .duration(100)
+        .EUt(24)
+
+    allthemods.recipes.gtceu.bender('ostrum_plate')
+        .itemInputs('ad_astra:ostrum_ingot')
+        .circuit(1)
+        .itemOutputs('ad_astra:ostrum_plate')
+        .duration(100)
+        .EUt(24)
+
+    allthemods.recipes.gtceu.bender('calorite_plate')
+        .itemInputs('ad_astra:calorite_ingot')
+        .circuit(1)
+        .itemOutputs('ad_astra:calorite_plate')
+        .duration(100)
+        .EUt(24)
+
+    // Rock Breaker recipes for End Stone and Netherrack
+    allthemods.recipes.gtceu.rock_breaker('netherrack')
+        .notConsumable('minecraft:netherrack')
+        .itemOutputs('minecraft:netherrack')
+        .addDataString('fluidA', 'minecraft:lava')
+        .addDataString('fluidB', 'minecraft:water')
+        .duration(16)
+        .EUt(EV)
+
+    allthemods.recipes.gtceu.rock_breaker('end_stone')
+        .notConsumable('minecraft:end_stone')
+        .itemOutputs('minecraft:end_stone')
+        .addDataString('fluidA', 'minecraft:lava')
+        .addDataString('fluidB', 'minecraft:water')
+        .duration(16)
+        .EUt(IV)
+
+    // fluix, sky steel dust, and shattered singularity maceration
     allthemods.recipes.gtceu.macerator('macerate_fluix')
         .itemInputs('ae2:fluix_crystal')
         .itemOutputs('ae2:fluix_dust')
         .duration(80)
         .EUt(ULV)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_sky_stone')
         .itemInputs('ae2:sky_stone_block')
         .itemOutputs('ae2:sky_dust')
         .duration(80)
         .EUt(ULV)
-    
+
+    allthemods.recipes.gtceu.macerator('macerate_shattered_singularity')
+        .itemInputs('advanced_ae:shattered_singularity')
+        .itemOutputs('advanced_ae:quantum_infused_dust')
+        .duration(80)
+        .EUt(ULV)
+
     // AE2 charger recipe for GT certus
     allthemods.custom({
         type: "ae2:charger",
         ingredient: { item: "gtceu:certus_quartz_gem" },
         result: { item: "ae2:charged_certus_quartz_crystal" }
     })
+
+    allthemods.recipes.gtceu.polarizer('ae2/charged_certus')
+        .itemInputs('ae2:certus_quartz_crystal')
+        .itemOutputs('ae2:charged_certus_quartz_crystal')
+        .duration(100)
+        .EUt(LV)
 
     // AE2 printed circuits in forming press
     allthemods.recipes.gtceu.forming_press('ae2/printed_logic_circuit')
@@ -89,38 +252,59 @@ ServerEvents.recipes(allthemods => {
         .itemOutputs('ae2:printed_logic_processor')
         .duration(80)
         .EUt(LV)
-    
+
     allthemods.recipes.gtceu.forming_press('ae2/universal/printed_logic_circuit')
         .itemInputs('minecraft:gold_ingot')
         .notConsumable('kubejs:universal_press')
         .itemOutputs('ae2:printed_logic_processor')
         .duration(80)
         .EUt(LV)
-    
+
+    allthemods.recipes.gtceu.forming_press('ae2/ultimate_universal/printed_logic_circuit')
+        .itemInputs('minecraft:gold_ingot')
+        .notConsumable('kubejs:ultimate_universal_press')
+        .itemOutputs('ae2:printed_logic_processor')
+        .duration(80)
+        .EUt(LV)
+
     allthemods.recipes.gtceu.forming_press('ae2/printed_silicon_circuit')
         .itemInputs('ae2:silicon')
         .notConsumable('ae2:silicon_press')
         .itemOutputs('ae2:printed_silicon')
         .duration(80)
         .EUt(LV)
-    
+
     allthemods.recipes.gtceu.forming_press('ae2/universal/printed_silicon_circuit')
         .itemInputs('ae2:silicon')
         .notConsumable('kubejs:universal_press')
         .itemOutputs('ae2:printed_silicon')
         .duration(80)
         .EUt(LV)
-    
+
+    allthemods.recipes.gtceu.forming_press('ae2/ultimate_universal/printed_silicon_circuit')
+        .itemInputs('ae2:silicon')
+        .notConsumable('kubejs:ultimate_universal_press')
+        .itemOutputs('ae2:printed_silicon')
+        .duration(80)
+        .EUt(LV)
+
     allthemods.recipes.gtceu.forming_press('ae2/printed_engineering_circuit')
         .itemInputs('minecraft:diamond')
         .notConsumable('ae2:engineering_processor_press')
         .itemOutputs('ae2:printed_engineering_processor')
         .duration(80)
         .EUt(LV)
-    
+
     allthemods.recipes.gtceu.forming_press('ae2/universal/printed_engineering_circuit')
         .itemInputs('minecraft:diamond')
         .notConsumable('kubejs:universal_press')
+        .itemOutputs('ae2:printed_engineering_processor')
+        .duration(80)
+        .EUt(LV)
+
+    allthemods.recipes.gtceu.forming_press('ae2/ultimate_universal/printed_engineering_circuit')
+        .itemInputs('minecraft:diamond')
+        .notConsumable('kubejs:ultimate_universal_press')
         .itemOutputs('ae2:printed_engineering_processor')
         .duration(80)
         .EUt(LV)
@@ -131,10 +315,17 @@ ServerEvents.recipes(allthemods => {
         .itemOutputs('ae2:printed_calculation_processor')
         .duration(80)
         .EUt(LV)
-    
+
     allthemods.recipes.gtceu.forming_press('ae2/universal/printed_calculation_circuit')
         .itemInputs('ae2:certus_quartz_crystal')
         .notConsumable('kubejs:universal_press')
+        .itemOutputs('ae2:printed_calculation_processor')
+        .duration(80)
+        .EUt(LV)
+
+    allthemods.recipes.gtceu.forming_press('ae2/ultimate_universal/printed_calculation_circuit')
+        .itemInputs('ae2:certus_quartz_crystal')
+        .notConsumable('kubejs:ultimate_universal_press')
         .itemOutputs('ae2:printed_calculation_processor')
         .duration(80)
         .EUt(LV)
@@ -146,20 +337,69 @@ ServerEvents.recipes(allthemods => {
         .duration(80)
         .EUt(HV)
 
+    allthemods.recipes.gtceu.forming_press('megacells/universal/printed_accumulation_circuit')
+        .itemInputs('megacells:sky_steel_ingot')
+        .notConsumable('kubejs:universal_addon_press')
+        .itemOutputs('megacells:printed_accumulation_processor')
+        .duration(80)
+        .EUt(HV)
+
+    allthemods.recipes.gtceu.forming_press('megacells/ultimate_universal/printed_accumulation_circuit')
+        .itemInputs('megacells:sky_steel_ingot')
+        .notConsumable('kubejs:ultimate_universal_press')
+        .itemOutputs('megacells:printed_accumulation_processor')
+        .duration(80)
+        .EUt(HV)
+
     allthemods.recipes.gtceu.forming_press('appflux/printed_energy_circuit')
         .itemInputs('appflux:charged_redstone')
         .notConsumable('appflux:energy_processor_press')
         .itemOutputs('appflux:printed_energy_processor')
         .duration(80)
         .EUt(MV)
-    
+
+    allthemods.recipes.gtceu.forming_press('appflux/universal/printed_energy_circuit')
+        .itemInputs('appflux:charged_redstone')
+        .notConsumable('kubejs:universal_addon_press')
+        .itemOutputs('appflux:printed_energy_processor')
+        .duration(80)
+        .EUt(MV)
+
+    allthemods.recipes.gtceu.forming_press('appflux/ultimate_universal/printed_energy_circuit')
+        .itemInputs('appflux:charged_redstone')
+        .notConsumable('kubejs:ultimate_universal_press')
+        .itemOutputs('appflux:printed_energy_processor')
+        .duration(80)
+        .EUt(MV)
+
+    allthemods.recipes.gtceu.forming_press('aae/printed_quantum_circuit')
+        .itemInputs('advanced_ae:quantum_alloy')
+        .notConsumable('advanced_ae:quantum_processor_press')
+        .itemOutputs('advanced_ae:printed_quantum_processor')
+        .duration(80)
+        .EUt(HV)
+
+    allthemods.recipes.gtceu.forming_press('aae/universal/printed_quantum_circuit')
+        .itemInputs('advanced_ae:quantum_alloy')
+        .notConsumable('kubejs:universal_addon_press')
+        .itemOutputs('advanced_ae:printed_quantum_processor')
+        .duration(80)
+        .EUt(HV)
+
+    allthemods.recipes.gtceu.forming_press('aae/ultimate_universal/printed_quantum_circuit')
+        .itemInputs('advanced_ae:quantum_alloy')
+        .notConsumable('kubejs:ultimate_universal_press')
+        .itemOutputs('advanced_ae:printed_quantum_processor')
+        .duration(80)
+        .EUt(HV)
+
     // AE2 processors in forming press
     allthemods.recipes.gtceu.forming_press('ae2/logic_circuit')
         .itemInputs(['ae2:printed_logic_processor', 'minecraft:redstone', 'ae2:printed_silicon'])
         .itemOutputs('ae2:logic_processor')
         .duration(80)
         .EUt(LV)
-    
+
     allthemods.recipes.gtceu.forming_press('ae2/engineering_circuit')
         .itemInputs(['ae2:printed_engineering_processor', 'minecraft:redstone', 'ae2:printed_silicon'])
         .itemOutputs('ae2:engineering_processor')
@@ -184,6 +424,12 @@ ServerEvents.recipes(allthemods => {
         .duration(80)
         .EUt(MV)
 
+    allthemods.recipes.gtceu.forming_press('aae/quantum_circuit')
+        .itemInputs(['advanced_ae:printed_quantum_processor', 'minecraft:redstone', 'ae2:printed_silicon'])
+        .itemOutputs('advanced_ae:quantum_processor')
+        .duration(80)
+        .EUt(HV)
+
     // ATO and vanilla silk touched ore maceration recipes
     // Minecraft stone/deepslate/nether ores
     allthemods.recipes.gtceu.macerator('macerate_iron_ore')
@@ -193,7 +439,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_iron_ore')
         .itemInputs('minecraft:deepslate_iron_ore')
         .itemOutputs('2x gtceu:crushed_iron_ore')
@@ -201,7 +447,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_coal_ore')
         .itemInputs('minecraft:coal_ore')
         .itemOutputs('4x gtceu:crushed_coal_ore')
@@ -209,7 +455,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_coal_ore')
         .itemInputs('minecraft:deepslate_coal_ore')
         .itemOutputs('4x gtceu:crushed_coal_ore')
@@ -217,7 +463,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_copper_ore')
         .itemInputs('minecraft:copper_ore')
         .itemOutputs('2x gtceu:crushed_copper_ore')
@@ -225,7 +471,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_copper_ore')
         .itemInputs('minecraft:deepslate_copper_ore')
         .itemOutputs('2x gtceu:crushed_copper_ore')
@@ -241,7 +487,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_gold_ore')
         .itemInputs('minecraft:deepslate_gold_ore')
         .itemOutputs('2x gtceu:crushed_gold_ore')
@@ -249,7 +495,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_nether_gold_ore')
         .itemInputs('minecraft:nether_gold_ore')
         .itemOutputs('4x gtceu:crushed_gold_ore')
@@ -257,7 +503,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:netherrack_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_redstone_ore')
         .itemInputs('minecraft:redstone_ore')
         .itemOutputs('10x gtceu:crushed_redstone_ore')
@@ -265,7 +511,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_redstone_ore')
         .itemInputs('minecraft:deepslate_redstone_ore')
         .itemOutputs('10x gtceu:crushed_redstone_ore')
@@ -273,7 +519,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_emerald_ore')
         .itemInputs('minecraft:emerald_ore')
         .itemOutputs('4x gtceu:crushed_emerald_ore')
@@ -281,7 +527,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_emerald_ore')
         .itemInputs('minecraft:deepslate_emerald_ore')
         .itemOutputs('4x gtceu:crushed_emerald_ore')
@@ -289,7 +535,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_lapis_ore')
         .itemInputs('minecraft:lapis_ore')
         .itemOutputs('12x gtceu:crushed_lapis_ore')
@@ -297,7 +543,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_lapis_ore')
         .itemInputs('minecraft:deepslate_lapis_ore')
         .itemOutputs('12x gtceu:crushed_lapis_ore')
@@ -305,7 +551,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_diamond_ore')
         .itemInputs('minecraft:diamond_ore')
         .itemOutputs('2x gtceu:crushed_diamond_ore')
@@ -313,7 +559,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_diamond_ore')
         .itemInputs('minecraft:deepslate_diamond_ore')
         .itemOutputs('2x gtceu:crushed_diamond_ore')
@@ -321,7 +567,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_nether_quartz_ore')
         .itemInputs('minecraft:nether_quartz_ore')
         .itemOutputs('8x gtceu:crushed_nether_quartz_ore')
@@ -337,14 +583,14 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:quartzite_gem', 1400, 850)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_other_redstone_ore')
         .itemInputs('alltheores:other_redstone_ore')
         .itemOutputs('40x gtceu:crushed_redstone_ore')
         .chancedOutput('gtceu:cinnabar_gem', 1400, 850)
         .duration(400)
         .EUt(2)
-    
+
     // ATO stone/deepslate/nether/end ores
     allthemods.recipes.gtceu.macerator('macerate_aluminum_ore')
         .itemInputs('alltheores:aluminum_ore')
@@ -353,7 +599,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_aluminum_ore')
         .itemInputs('alltheores:deepslate_aluminum_ore')
         .itemOutputs('2x gtceu:crushed_aluminium_ore')
@@ -361,7 +607,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_nether_aluminum_ore')
         .itemInputs('alltheores:nether_aluminum_ore')
         .itemOutputs('4x gtceu:crushed_aluminium_ore')
@@ -369,7 +615,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:netherrack_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_lead_ore')
         .itemInputs('alltheores:lead_ore')
         .itemOutputs('2x gtceu:crushed_lead_ore')
@@ -377,7 +623,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_lead_ore')
         .itemInputs('alltheores:deepslate_lead_ore')
         .itemOutputs('2x gtceu:crushed_lead_ore')
@@ -385,7 +631,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_nether_lead_ore')
         .itemInputs('alltheores:nether_lead_ore')
         .itemOutputs('4x gtceu:crushed_lead_ore')
@@ -401,7 +647,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_nickel_ore')
         .itemInputs('alltheores:deepslate_nickel_ore')
         .itemOutputs('2x gtceu:crushed_nickel_ore')
@@ -409,7 +655,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_nether_nickel_ore')
         .itemInputs('alltheores:nether_nickel_ore')
         .itemOutputs('4x gtceu:crushed_nickel_ore')
@@ -425,7 +671,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_platinum_ore')
         .itemInputs('alltheores:deepslate_platinum_ore')
         .itemOutputs('2x gtceu:crushed_platinum_ore')
@@ -433,7 +679,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_nether_platinum_ore')
         .itemInputs('alltheores:nether_platinum_ore')
         .itemOutputs('4x gtceu:crushed_platinum_ore')
@@ -449,7 +695,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_silver_ore')
         .itemInputs('alltheores:deepslate_silver_ore')
         .itemOutputs('2x gtceu:crushed_silver_ore')
@@ -457,7 +703,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_nether_silver_ore')
         .itemInputs('alltheores:nether_silver_ore')
         .itemOutputs('4x gtceu:crushed_silver_ore')
@@ -465,7 +711,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:netherrack_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_tin_ore')
         .itemInputs('alltheores:tin_ore')
         .itemOutputs('2x gtceu:crushed_tin_ore')
@@ -473,7 +719,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_tin_ore')
         .itemInputs('alltheores:deepslate_tin_ore')
         .itemOutputs('2x gtceu:crushed_tin_ore')
@@ -481,7 +727,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_nether_tin_ore')
         .itemInputs('alltheores:nether_tin_ore')
         .itemOutputs('4x gtceu:crushed_tin_ore')
@@ -492,12 +738,12 @@ ServerEvents.recipes(allthemods => {
 
     allthemods.recipes.gtceu.macerator('macerate_ruby_ore')
         .itemInputs('alltheores:ruby_ore')
-        .itemOutputs('2x gtceu:crushed_tin_ore')
+        .itemOutputs('2x gtceu:crushed_ruby_ore')
         .chancedOutput('gtceu:chromium_dust', 1400, 850)
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_ruby_ore')
         .itemInputs('alltheores:deepslate_ruby_ore')
         .itemOutputs('2x gtceu:crushed_ruby_ore')
@@ -513,7 +759,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:stone_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_deepslate_sapphire_ore')
         .itemInputs('alltheores:deepslate_sapphire_ore')
         .itemOutputs('2x gtceu:crushed_sapphire_ore')
@@ -521,7 +767,7 @@ ServerEvents.recipes(allthemods => {
         .chancedOutput('gtceu:deepslate_dust', 6700, 800)
         .duration(400)
         .EUt(2)
-    
+
     allthemods.recipes.gtceu.macerator('macerate_salt_ore')
         .itemInputs('railcraft:saltpeter_ore')
         .itemOutputs('4x gtceu:crushed_salt_ore')

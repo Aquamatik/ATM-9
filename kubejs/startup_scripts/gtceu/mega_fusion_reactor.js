@@ -14,17 +14,17 @@ GTCEuStartupEvents.registry('gtceu:recipe_type', allthemods => {
     GTRecipeTypes.FUSION_RECIPES.onRecipeBuild((builder, provider) => {
         GTRecipeTypes.get('mega_fusion_reactor').copyFrom(builder)
             .duration(Math.max((builder.duration / 2), 1))
-            .EUt(builder.EUt() * 1.5)
+            .EUt(builder.EUt().voltage(), builder.EUt().amperage() * 1.5)
             .save(provider);
     });
 })
 
 GTCEuStartupEvents.registry('gtceu:machine', allthemods => {
-    allthemods.create('mega_fusion_reactor', 'multiblock', (holder) => new $FusionReactorMachine(holder, GTValues.UIV))
+    allthemods.create('mega_fusion_reactor', 'multiblock').machine((holder) => new $FusionReactorMachine(holder, GTValues.UIV))
         .rotationState(RotationState.NON_Y_AXIS)
         .recipeTypes(GTRecipeTypes.get('mega_fusion_reactor'))
-        .recipeModifiers([GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK)])
-        .appearanceBlock(GCyMBlocks.CASING_ATOMIC)
+        .recipeModifiers([GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.OC_NON_PERFECT])
+        .appearanceBlock(GCYMBlocks.CASING_ATOMIC)
         .pattern(definition => FactoryBlockPattern.start()
             .aisle("                                 ", "                                 ", "C  N C                     C N  C", "C  N C                     C N  C", "C  N C                     C N  C", "C  N C                     C N  C", "                                 ", "                                 ")
             .aisle("                                 ", "C  N C        AAAAA        C N  C", "ATT#H#H C    CAAAAAC    C H#H#TTA", "ATT#H#H CS  SCAGGGACS  SC H#H#TTA", "ATT#H#H CS  SCAGGGACS  SC H#H#TTA", "ATT#H#H C    CAAAAAC    C H#H#TTA", "C  N C        AAAAA        C N  C", "                                 ")
@@ -74,8 +74,8 @@ GTCEuStartupEvents.registry('gtceu:machine', allthemods => {
             .where(' ', Blocks.AIR)
             .where('#', Blocks.AIR)
             .build())*/
-        .workableCasingRenderer("gtceu:block/casings/gcym/atomic_casing",
-            "gtceu:block/multiblock/fusion_reactor", false)
+        .workableCasingModel("gtceu:block/casings/gcym/atomic_casing",
+            "gtceu:block/multiblock/fusion_reactor")
 })
 
 // This File has been authored by AllTheMods Staff, or a Community contributor for use in AllTheMods - AllTheMods 9.

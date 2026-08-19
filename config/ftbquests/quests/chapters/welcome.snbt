@@ -35,8 +35,6 @@
 				"{atm9.quest.welcome.desc.welcome1}"
 				""
 				"{atm9.quest.welcome.desc.welcome2}"
-				""
-				"{atm9.quest.welcome.desc.welcome3}"
 			]
 			icon: "allthetweaks:atm_star"
 			id: "3BC0A50886A3222B"
@@ -49,10 +47,9 @@
 			size: 3.0d
 			tasks: [{
 				id: "5A1784C5676CDC62"
-				title: "Welcome to All The Mods 9!"
+				title: "{atm9.quest.welcome.welcome}"
 				type: "checkmark"
 			}]
-			title: "{atm9.quest.welcome.welcome}"
 			x: 0.0d
 			y: -0.5d
 		}
@@ -61,8 +58,6 @@
 				"{atm9.quest.welcome.desc.quests1}"
 				""
 				"{atm9.quest.welcome.desc.quests2}"
-				""
-				"{atm9.quest.welcome.desc.quests3}"
 			]
 			icon: "ftbquests:book"
 			id: "3708A4780ACEB34E"
@@ -76,10 +71,9 @@
 			size: 1.5d
 			tasks: [{
 				id: "52BB142F044075B4"
-				title: "Quests"
+				title: "{atm9.quest.welcome.quests}"
 				type: "checkmark"
 			}]
-			title: "{atm9.quest.welcome.quests}"
 			x: 2.5d
 			y: -0.5d
 		}
@@ -103,10 +97,9 @@
 			size: 1.5d
 			tasks: [{
 				id: "10A16F89D4AD238D"
-				title: "Useful Commands"
+				title: "{atm9.quest.welcome.commands}"
 				type: "checkmark"
 			}]
-			title: "{atm9.quest.welcome.commands}"
 			x: -2.5d
 			y: -0.5d
 		}
@@ -134,10 +127,9 @@
 			size: 1.5d
 			tasks: [{
 				id: "103C42C743E2A2DB"
-				title: "Claiming Chunks"
+				title: "{atm9.quest.welcome.claims}"
 				type: "checkmark"
 			}]
-			title: "{atm9.quest.welcome.claims}"
 			x: 4.5d
 			y: -0.5d
 		}
@@ -159,22 +151,24 @@
 			size: 1.5d
 			tasks: [{
 				id: "4F13A02FB0055A62"
-				title: "Creating a Team"
+				title: "{atm9.quest.welcome.team}"
 				type: "checkmark"
 			}]
-			title: "{atm9.quest.welcome.team}"
 			x: -4.5d
 			y: -0.5d
 		}
 		{
 			description: [
 				"{atm9.quest.welcome.desc.translations}"
-				"&lTranslator List&r (as of pack version v0.3.0)"
+				"&lTranslator List&r (as of pack version v0.3.6)"
 				"&9Spanish&r by &2radzratz&r, &2abel102389&r, &2arivio&r, and &2metabodiru&r."
 				"&9Norwegian&r (Bokmål) by &2Permest&r."
 				"&9Portugese&r by &2oruiva&r."
 				"&9Japanese&r by &2fishlife1 (flll)&r."
 				"&9Korean&r by &2J-YonKen&r."
+				"&9German&r by &2Aquamatik&r."
+				"&9Dutch&r by &2NeofastFTL&r."
+				"&9Italian&r by &2Il-mostro-di-gioacchinopoli&r."
 			]
 			icon: {
 				Count: 1
@@ -211,8 +205,8 @@
 				"This quest is intentionally hidden, if you're seeing this, you're in editing mode."
 			]
 			disable_toast: true
-			hide: true
 			hide_details_until_startable: true
+			hide_until_deps_visible: true
 			icon: {
 				Count: 1
 				id: "ftbquests:custom_icon"
@@ -238,7 +232,7 @@
 				}
 			]
 			x: 0.0d
-			y: 6.0d
+			y: 5.5d
 		}
 	]
 	title: "{atm9.chapters.1.title}"

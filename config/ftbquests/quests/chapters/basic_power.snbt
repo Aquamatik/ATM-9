@@ -44,7 +44,6 @@
 				title: "{atm9.quest.power.ATP}"
 				type: "checkmark"
 			}]
-			title: "{atm9.quest.power.ATP}"
 			x: -3.5d
 			y: 0.5d
 		}
@@ -189,10 +188,9 @@
 			subtitle: "{atm9.quest.power.subt.early}"
 			tasks: [{
 				id: "55F3497E936C4885"
-				title: "Burning Fuel for Power"
+				title: "{atm9.quest.power.early}"
 				type: "checkmark"
 			}]
-			title: "{atm9.quest.power.early}"
 			x: -5.0d
 			y: 3.0d
 		}
@@ -309,7 +307,6 @@
 				title: "{atm9.quest.power.moving}"
 				type: "checkmark"
 			}]
-			title: "{atm9.quest.power.moving}"
 			x: -9.0d
 			y: 0.5d
 		}
@@ -359,10 +356,9 @@
 			size: 1.5d
 			tasks: [{
 				id: "3121BA0C9976AFCD"
-				title: "Storing Power"
+				title: "{atm9.quest.power.storage}"
 				type: "checkmark"
 			}]
-			title: "{atm9.quest.power.storage}"
 			x: 3.0d
 			y: 0.5d
 		}
@@ -594,14 +590,13 @@
 				title: "{atm9.quest.power.end}"
 				type: "checkmark"
 			}]
-			title: "{atm9.quest.power.end}"
 			x: -3.5d
 			y: 4.5d
 		}
 		{
 			dependencies: ["4EEAB467C722ECE7"]
 			description: ["{atm9.quest.power.desc.betterpipez}"]
-			hide: true
+			hide_until_deps_visible: true
 			id: "1409C17773B6A131"
 			rewards: [
 				{
@@ -667,10 +662,9 @@
 			size: 1.5d
 			tasks: [{
 				id: "4FC7F1A8F2BDEF93"
-				title: "Advanced Mekanism Chapter"
+				title: "{atm9.quest.power.more}"
 				type: "checkmark"
 			}]
-			title: "{atm9.quest.power.more}"
 			x: 3.0d
 			y: 3.5d
 		}
@@ -937,8 +931,8 @@
 				"This quest is intentionally hidden, if you're seeing this, you're in editing mode."
 			]
 			disable_toast: true
-			hide: true
 			hide_details_until_startable: true
+			hide_until_deps_visible: true
 			icon: {
 				Count: 1
 				id: "ftbquests:custom_icon"
